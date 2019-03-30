@@ -1,13 +1,5 @@
 #include <Nefry.h>
-#include <NefryDisplay.h>
-#include <NefrySetting.h>
-
 #define heaterSelPin A1
-
-void setting() {
-  Nefry.disableDisplayStatus();
-}
-NefrySetting nefrySetting(setting);
 
 void setup() {
   pinMode(heaterSelPin, OUTPUT);  // set the heaterSelPin as digital output.
@@ -18,7 +10,7 @@ void setup() {
 void loop() {
   float sensor_volt;
   float RS_gas; // Get value of RS in a GAS
-  float RS_air = -100.0;
+  float RS_air = -100.0;  //ここに最初のテストコードで得られた値を入れる
   float ratio; // Get ratio RS_GAS/RS_air
   int sensorValue = analogRead(A0);
   sensor_volt = (float)sensorValue / 4095.0 * 5.0;
@@ -36,10 +28,5 @@ void loop() {
   Nefry.println(ratio);
 
   Nefry.print("\n");
-
-  NefryDisplay.clear();
-  NefryDisplay.setFont(ArialMT_Plain_24);
-  NefryDisplay.drawString(0, 40, String(ratio));
-  NefryDisplay.display();
   Nefry.ndelay(1000);
 }
